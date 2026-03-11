@@ -6,6 +6,8 @@ const targetText = document.getElementById('target-text');
 const toggle = document.getElementById('direction-toggle');
 const sourceLabel = document.getElementById('lang-source');
 const targetLabel = document.getElementById('lang-target');
+const video = document.getElementById('webcam');
+const subtitleText = document.getElementById('subtitle-text');
 
 let recognition;
 let isRecording = false;
@@ -37,6 +39,7 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
 
         const currentText = finalTranscript || interimTranscript;
         sourceText.innerText = currentText;
+        subtitleText.innerText = currentText; // Show what we hear as subtitle first
 
         if (finalTranscript) {
             translateText(finalTranscript);
@@ -99,6 +102,19 @@ function stopRecording() {
 
 micBtn.addEventListener('click', toggleRecording);
 
+// Camera initialization
+async function initCamera() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        video.srcObject = stream;
+    } catch (error) {
+        console.error("Camera access error:", error);
+        subtitleText.innerText = "Camera access denied or not available.";
+    }
+}
+
+initCamera();
+
 // Translation function using MyMemory API (Free, no key required for basic usage)
 async function translateText(text) {
     const isFiToEn = toggle.checked;
@@ -112,7 +128,9 @@ async function translateText(text) {
         const data = await response.json();
         
         if (data.responseData) {
-            targetText.innerText = data.responseData.translatedText;
+            const translated = data.responseData.translatedText;
+            targetText.innerText = translated;
+            subtitleText.innerText = translated; // Update subtitle with translated text
         } else {
             targetText.innerText = "Translation error.";
         }
