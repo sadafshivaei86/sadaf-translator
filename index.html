@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADAF - Voice Translator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">SADAF</h1>
+            <p class="subtitle">Real-time Voice Translator</p>
+        </header>
+
+        <main>
+            <div class="control-panel">
+                <div class="toggle-container">
+                    <span class="lang-label" id="lang-source">English</span>
+                    <label class="switch">
+                        <input type="checkbox" id="direction-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="lang-label" id="lang-target">Finnish</span>
+                </div>
+                
+                <button id="mic-btn" class="mic-button">
+                    <svg class="mic-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" fill="currentColor"/>
+                        <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18.5V23M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="pulse-ring"></span>
+                </button>
+            </div>
+
+            <div class="translation-grid">
+                <div class="text-card source-card">
+                    <label>Listening...</label>
+                    <div id="source-text" class="text-area">Click the microphone to start...</div>
+                </div>
+                <div class="text-card target-card">
+                    <label>Translation</label>
+                    <div id="target-text" class="text-area">Your translation will appear here.</div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 SADAF. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
